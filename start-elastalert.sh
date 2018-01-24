@@ -128,7 +128,10 @@ fi
 
 if [ -n "$TEST_RULE" ]; then
     echo "Starting testing of alert rule..."
-    elastalert-test-rule "${TEST_RULE}"
+    elastalert-test-rule \
+            --days 3 \
+            --config "${ELASTALERT_CONFIG}" \
+            "${TEST_RULE}"
 else
     echo "Starting Elastalert..."
     exec supervisord -c "${ELASTALERT_SUPERVISOR_CONF}" -n
