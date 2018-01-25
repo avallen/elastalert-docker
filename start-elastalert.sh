@@ -141,11 +141,8 @@ if [ -n "$TEST_RULE_FILE" ]; then
     if [ -n "$TEST_RULE_SCHEMA_ONLY" ]; then
         TEST_PARAMS="${TEST_PARAMS} --schema-only"
     fi
-
-    elastalert-test-rule \
-            "${TEST_PARAMS} " \
-            --config "${ELASTALERT_CONFIG}" \
-            "${TEST_RULE_FILE}"
+    echo -e "elastalert-test-rule ${TEST_PARAMS} --config \"${ELASTALERT_CONFIG}\" \"${TEST_RULE_FILE}\""
+    elastalert-test-rule ${TEST_PARAMS} --config "${ELASTALERT_CONFIG}" "${TEST_RULE_FILE}"
 else
     echo "Starting Elastalert..."
     exec supervisord -c "${ELASTALERT_SUPERVISOR_CONF}" -n
