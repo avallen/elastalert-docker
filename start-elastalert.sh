@@ -86,6 +86,8 @@ fi
 
 # Elastalert Supervisor configuration:
 if [ ! -f ${ELASTALERT_SUPERVISOR_CONF} ]; then
+    echo "Elastalert Supervisor configuration..."
+
     cp "${ELASTALERT_HOME}/supervisord.conf.example" "${ELASTALERT_SUPERVISOR_CONF}" && \
 
     # Redirect Supervisor log output to a file in the designated logs directory.
@@ -93,7 +95,7 @@ if [ ! -f ${ELASTALERT_SUPERVISOR_CONF} ]; then
     # Redirect Supervisor stderr output to a file in the designated logs directory.
     sed -i -e"s|stderr_logfile=.*log|stderr_logfile=${LOG_DIR}/elastalert_stderr.log|g" "${ELASTALERT_SUPERVISOR_CONF}"
     # Modify the start-command.
-    sed -i -e"s|python -m elastalert|elastalert --config ${ELASTALERT_CONFIG}|g" "${ELASTALERT_SUPERVISOR_CONF}"
+    sed -i -e"s|python|elastalert --config ${ELASTALERT_CONFIG}|g" "${ELASTALERT_SUPERVISOR_CONF}"
 fi
 
 # Set authentication if needed
