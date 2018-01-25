@@ -126,12 +126,26 @@ else
     echo "Elastalert index already exists in Elasticsearch."
 fi
 
-if [ -n "$TEST_RULE" ]; then
+if [ -n "$TEST_RULE_FILE" ]; then
     echo "Starting testing of alert rule..."
+    TEST_PARAMS=""
+
+    if [ -n "$TEST_RULE_DAYS" ]; then
+        TEST_PARAMS="${TEST_PARAMS} --days ${TEST_RULE_DAYS}"
+    fi
+
+    if [ -n "$TEST_RULE_COUNT_ONLY" ]; then
+        TEST_PARAMS="${TEST_PARAMS} --count-only"
+    fi
+
+    if [ -n "$TEST_RULE_SCHEMA_ONLY" ]; then
+        TEST_PARAMS="${TEST_PARAMS} --schema-only"
+    fi
+
     elastalert-test-rule \
-            --days 1 \
+            "${TEST_PARAMS}" \
             --config "${ELASTALERT_CONFIG}" \
-            "${TEST_RULE}"
+            "${TEST_RULE_FILE}"
 else
     echo "Starting Elastalert..."
     exec supervisord -c "${ELASTALERT_SUPERVISOR_CONF}" -n
