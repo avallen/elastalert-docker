@@ -143,7 +143,7 @@ if [ -n "$TEST_RULE_FILE" ]; then
     fi
 
     elastalert-test-rule \
-            "${TEST_PARAMS}" \
+            "${TEST_PARAMS} " \
             --config "${ELASTALERT_CONFIG}" \
             "${TEST_RULE_FILE}"
 else
