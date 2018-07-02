@@ -101,7 +101,7 @@ fi
 # Set authentication if needed
 if [ -n "$ELASTICSEARCH_USER" ] && [ -n "$ELASTICSEARCH_PASSWORD" ]; then
     WGET_AUTH="$ELASTICSEARCH_USER:$ELASTICSEARCH_PASSWORD@"
-    CREATE_EA_OPTIONS="${CREATE_EA_OPTIONS} --username ${ELASTICSEARCH_USER} --password ${ELASTICSEARCH_PASSWORD}"
+    CREATE_EA_OPTIONS="${CREATE_EA_OPTIONS} --username \"${ELASTICSEARCH_USER}\" --password \"${ELASTICSEARCH_PASSWORD}\""
 else
     WGET_AUTH=""
 fi
@@ -118,7 +118,7 @@ sleep 5
 if ! wget ${WGET_OPTIONS} -O - "${WGET_SCHEMA}${WGET_AUTH}${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}/${ELASTALERT_INDEX}" 2>/dev/null
 then
     echo "Creating Elastalert index in Elasticsearch..."
-    elastalert-create-index "${CREATE_EA_OPTIONS}" \
+    elastalert-create-index ${CREATE_EA_OPTIONS} \
         --host "${ELASTICSEARCH_HOST}" \
         --port "${ELASTICSEARCH_PORT}" \
         --config "${ELASTALERT_CONFIG}" \
