@@ -143,6 +143,11 @@ if [ -n "$TEST_RULE_FILE" ]; then
     if [ -n "$TEST_RULE_SCHEMA_ONLY" ]; then
         TEST_PARAMS="${TEST_PARAMS} --schema-only"
     fi
+
+    if [ -n "$TEST_SEND_ALERTS" ]; then
+        TEST_PARAMS="${TEST_PARAMS} --verbose"
+    fi
+
     echo -e "elastalert-test-rule ${TEST_PARAMS} --config \"${ELASTALERT_CONFIG}\" \"${TEST_RULE_FILE}\""
     elastalert-test-rule ${TEST_PARAMS} --config "${ELASTALERT_CONFIG}" "${TEST_RULE_FILE}"
 else
