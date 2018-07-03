@@ -145,7 +145,7 @@ if [ -n "$TEST_RULE_FILE" ]; then
     fi
 
     if [ -n "$TEST_SEND_ALERTS" ]; then
-        TEST_PARAMS="${TEST_PARAMS} --verbose"
+        TEST_PARAMS="${TEST_PARAMS} --alert"
     fi
 
     echo -e "elastalert-test-rule ${TEST_PARAMS} --config \"${ELASTALERT_CONFIG}\" \"${TEST_RULE_FILE}\""
