@@ -144,7 +144,7 @@ if [ -n "$TEST_RULE_FILE" ]; then
         TEST_PARAMS="${TEST_PARAMS} --schema-only"
     fi
 
-    if [ -n "$TEST_SEND_ALERTS" ]; then
+    if [ -n "$TEST_RULE_SEND_ALERTS" ]; then
         TEST_PARAMS="${TEST_PARAMS} --alert"
     fi
 
